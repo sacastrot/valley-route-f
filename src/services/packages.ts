@@ -54,6 +54,8 @@ async function getPackageList(page: number): Promise<{ list: Package[]; pages: n
   } catch (error) {
     if (error instanceof BadRequestError) {
       throw new Error('Intenta de nuevo más tarde')
+    } else {
+      throw new Error('Error al obtener la lista de paquetes')
     }
   }
 }
@@ -75,6 +77,8 @@ async function getNodesList(): Promise<NodeValley[]> {
   } catch (error) {
     if (error instanceof BadRequestError) {
       throw new Error('Intenta de nuevo más tarde')
+    } else {
+      throw new Error('Error al obtener la lista de nodos')
     }
   }
 }

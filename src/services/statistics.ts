@@ -38,6 +38,8 @@ async function getNodeStartStatistics(): Promise<string> {
       throw new Error('No hay datos disponibles')
     } else if (error instanceof UnknownError) {
       throw new Error('Ocurrió un error inesperado, intenta de nuevo más tarde')
+    } else {
+      throw new Error('Error al obtener las estadísticas de inicio de nodos')
     }
   }
 }
@@ -58,6 +60,8 @@ async function getNodeEndStatistics(): Promise<string> {
       throw new Error('No hay datos disponibles')
     } else if (error instanceof UnknownError) {
       throw new Error('Ocurrió un error inesperado, intenta de nuevo más tarde')
+    } else {
+      throw new Error('Error al obtener las estadísticas de fin de nodos')
     }
   }
 }
