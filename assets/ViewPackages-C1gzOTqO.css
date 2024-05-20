@@ -1,0 +1,27 @@
+
+.package_card[data-v-0f1f2897] {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+  min-width: 20rem;
+  padding: 2rem;
+.head[data-v-0f1f2897] {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.section[data-v-0f1f2897] {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+}
+
+h1[data-v-66b584a4] {
+  font-weight: 600;
+}
+.home[data-v-66b584a4] {
+  font-size: 1.6rem;
+}
