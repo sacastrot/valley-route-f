@@ -21,7 +21,7 @@ import HomeView from '../views/HomeView.vue'
  * The routes for the application.
  */
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory('/valley-route-f/'),
   routes: [
     /**
      * This route refers to the welcome page.
