@@ -12,8 +12,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  build: {
-    minify: false,
-    sourcemap: true
-  }
+  base: '/valley-route-f/'
 })
