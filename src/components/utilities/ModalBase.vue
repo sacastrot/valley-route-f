@@ -81,10 +81,6 @@ const display = ref('block')
         i {
           font-size: 2.5rem;
           cursor: pointer;
-          transition: color 0.2s ease;
-          &:hover {
-            color: var(--color-btn-primary);
-          }
         }
       }
       .modal-body {
@@ -94,10 +90,6 @@ const display = ref('block')
       }
     }
   }
-}
-
-.shoModal {
-  display: block;
 }
 
 /* This class is used to create the fade effect

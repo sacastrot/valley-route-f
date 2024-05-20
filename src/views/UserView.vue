@@ -78,7 +78,7 @@ onBeforeMount(async () => {
       </div>
       <div class="header">
         <!-- Title of the page -->
-        <h1 class="font-bold">Hola, {{ userStore.user.firstName }}</h1>
+        <h1 class="font-bold">Hola, {{ userStore.state.firstName }}</h1>
       </div>
       <div class="spacer h-[5rem]"></div>
       <!-- Services section -->

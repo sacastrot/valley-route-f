@@ -260,7 +260,7 @@ const requestLogin = async () => {
     const response = await autService.login(formData)
 
     // Store the token in the user store
-    userStore.user.token = response.token
+    userStore.state.token = response.token
 
     // Store the user data in the local storage
     window.localStorage.setItem(

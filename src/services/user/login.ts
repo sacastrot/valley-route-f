@@ -46,7 +46,7 @@ async function login(body: FormData): Promise<UserToken> {
  */
 async function getUser(): Promise<void> {
   const userStore = useStoreUser()
-  const user = userStore.user
+  const user = userStore.state
   try {
     const { data } = await baseRequest.get('/')
     user.email = data.email

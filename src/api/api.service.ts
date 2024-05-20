@@ -76,7 +76,6 @@ const baseRequest = axios.create({
 })
 
 // Hook for User Store
-const userStore = useStoreUser()
 
 /**
  * This function is used to logout the user and remove the user data
@@ -85,6 +84,7 @@ const userStore = useStoreUser()
  * @returns {void}
  */
 const logout = (): void => {
+  const userStore = useStoreUser()
   userStore.logout()
   window.localStorage.removeItem('userData')
   location.reload()

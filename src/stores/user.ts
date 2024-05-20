@@ -18,11 +18,11 @@ import { defineStore } from 'pinia'
 /**
  * Pinia store for managing user state.
  */
-export const useStoreUser = defineStore('user', () => {
+export const useStoreUser = defineStore('user-store', () => {
   /**
    * Reactive reference for user data.
    */
-  const user = ref<{
+  const state = ref<{
     firstName: string
     lastName: string
     token: string
@@ -37,18 +37,18 @@ export const useStoreUser = defineStore('user', () => {
   /**
    * Computed property for the full name of the user.
    */
-  const fullName = computed(() => `${user.value.firstName} ${user.value.lastName}`)
+  const fullName = computed(() => `${state.value.firstName} ${state.value.lastName}`)
 
   /**
    * Computed property to check if the user is authenticated.
    */
-  const isAuthenticated = computed(() => user.value.token !== '')
+  const isAuthenticated = computed(() => state.value.token !== '')
 
   /**
    * Function to log out the user by resetting user data.
    */
   const logout = () => {
-    user.value = {
+    state.value = {
       firstName: '',
       lastName: '',
       token: '',
@@ -56,5 +56,5 @@ export const useStoreUser = defineStore('user', () => {
     }
   }
 
-  return { user, fullName, isAuthenticated, logout }
+  return { state, fullName, isAuthenticated, logout }
 })

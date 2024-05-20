@@ -9,14 +9,14 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const userStore = useStoreUser()
-const user = userStore.user
+const user = userStore.state
 
 const redirectTo = (route: string) => {
   router.push({ name: route })
 }
 
 onBeforeMount(async () => {
-  console.log('HomeView -> welcome')
+  console.log('HomeView')
   const encryptedUser = window.localStorage.getItem('userData')
   if (encryptedUser) {
     const userData = JSON.parse(atob(encryptedUser))
