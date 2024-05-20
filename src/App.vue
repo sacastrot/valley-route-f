@@ -1,26 +1,32 @@
 <script setup lang="ts">
-//NProgress imports
+/**
+ * This file is the starting point of the application.
+ *
+ * In this file, you will find the logic for the App component.
+ *
+ * This component is responsible for rendering the layout of the application.
+ *
+ * @requires RouterView
+ * This component is used to render the views of the application.
+ *
+ * @requires NavBar
+ * This component is used to render the navigation bar of the application.
+ */
 
 //Vue imports
 
 //Vue Router imports
 import { RouterView } from 'vue-router'
 
-//Types imports
-
-//Models imports
-
-//Models Errors imports
-
 //Stores imports
 
-//Services imports
-
-//Utilities imports
-
-//Components imports
+//Models imports
 import NavBar from '@/components/layout/NavBar.vue'
 import PrimaryFooter from '@/components/page/PrimaryFooter.vue'
+
+//Views imports
+
+//Services imports
 </script>
 
 <template>

@@ -1,11 +1,21 @@
 <script setup lang="ts">
+/**
+ * This component is used to show the hero image
+ * in the home page
+ *
+ * @component HeroImage
+ * This component is used to show the hero image
+ */
+
+// Instance of the HeroImage component
 import HeroImage from '@/components/icons/HeroImage.vue'
 </script>
 <template>
   <div class="container hero h-[50rem] min-w-full px-5 overflow-hidden">
+    <!-- Insert the HeroImage component here -->
     <HeroImage class="mt-40" />
+    <!-- Hero text -->
     <div class="text">
-      <!-- <i class="bi bi-geo-alt-fill"></i> -->
       <h1 class="text-white sm:text-black">Valley Route</h1>
       <p class="text-white sm:text-black mt-10">
         Gestiona y conoce sobre el estado que tienen tus paquetes

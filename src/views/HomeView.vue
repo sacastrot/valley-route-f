@@ -2,25 +2,26 @@
 import HomeCard from '@/components/page/home/HomeCard.vue'
 import SectionCard from '@/components/page/home/SectionCard.vue'
 import TheWelcome from '@/components/page/home/TheWelcome.vue'
+import { autService } from '@/services/user/login'
 import { useStoreUser } from '@/stores/user'
 import { onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const userStore = useStoreUser()
+const user = userStore.user
 
-onBeforeMount(() => {
-  if (!userStore.isAuthenticated) {
-    const userData = localStorage.getItem('userData')
-    if (userData) {
-      const userSession = JSON.parse(atob(userData))
-      userStore.user.token = userSession.token
-      userStore.user.email = userSession.email
-    }
-  }
+const redirectTo = (route: string) => {
+  router.push({ name: route })
+}
 
-  if (userStore.isAuthenticated) {
-    router.push({ name: 'home' })
+onBeforeMount(async () => {
+  console.log('HomeView -> welcome')
+  const encryptedUser = window.localStorage.getItem('userData')
+  if (encryptedUser) {
+    const userData = JSON.parse(atob(encryptedUser))
+    user.token = userData.token
+    router.push({ name: 'userhome' })
   }
 })
 </script>
@@ -28,8 +29,23 @@ onBeforeMount(() => {
 <template>
   <main>
     <TheWelcome />
-    <SectionCard class="my-20">
+    <SectionCard class="my-20 cursor-pointer" @click="redirectTo('track-package')">
       <HomeCard />
+    </SectionCard>
+    <SectionCard class="my-20 cursor-pointer" @click="redirectTo('statistics')">
+      <div class="flex items-center justify-around gap-5 w-full">
+        <div class="image">
+          <img src="/analytics.png" alt="statistics icon" class="aspect-auto drop-shadow-xl" />
+        </div>
+        <div class="text min-h-full py-10 px-20 rounded-3xl bg-ochret flex flex-col justify-center">
+          <div class="title text-ochre mb-5">
+            <h2 class="font-bold">Estadísticas de nodo</h2>
+          </div>
+          <div class="description">
+            <p>Observa las estadísticas de los nodos</p>
+          </div>
+        </div>
+      </div>
     </SectionCard>
     <SectionCard class="my-20 utils">
       <div class="title">
@@ -37,16 +53,16 @@ onBeforeMount(() => {
       </div>
       <div class="content-utils">
         <div class="item">
-          <i class="bi bi-map-fill"></i>
-          <p>Visuliza la ubicación en un mapa</p>
+          <i class="bi bi-person-add"></i>
+          <p>Crear una nueva cuenta</p>
         </div>
         <div class="item">
           <i class="bi bi-pencil-square"></i>
           <p>Registra nuevos paquetes</p>
         </div>
         <div class="item">
-          <i class="bi bi-graph-up"></i>
-          <p>Ver estadísticas de los paquetes</p>
+          <i class="bi bi-list-ul"></i>
+          <p>Ver todos tus paquetes</p>
         </div>
       </div>
     </SectionCard>
@@ -79,6 +95,24 @@ onBeforeMount(() => {
         max-width: 15rem;
         text-align: center;
       }
+    }
+  }
+}
+
+.image {
+  img {
+    width: 100px;
+  }
+}
+.text {
+  .title {
+    h2 {
+      font-size: 4rem;
+    }
+  }
+  .description {
+    p {
+      font-size: 2rem;
     }
   }
 }

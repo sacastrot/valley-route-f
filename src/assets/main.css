@@ -2,9 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom styles 
+  - Add your custom styles here
+  This file is imported in src/main.js
+  This styles will be applied to all the components
+*/
+
+/* This set 1rem = 10px */
 html {
   font-size: 62.5%;
 }
+
+/* Custom fonts size*/
 h1 {
   font-size: 3.6rem;
 }
@@ -33,6 +42,7 @@ p {
   font-size: 1.6rem;
 }
 
+/* Custom font padding and margin */
 h1,
 h2,
 h3,
@@ -44,6 +54,7 @@ p {
   padding: 0;
 }
 
+/* Set border box in all components*/
 *,
 *::before,
 *::after {

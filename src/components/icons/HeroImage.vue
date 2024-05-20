@@ -1,3 +1,11 @@
+<script setup lang="ts">
+/**
+ * This component is used to show the hero image,
+ * this component is used in the home page
+ * (src/views/HomeView.vue)
+ */
+</script>
+
 <template>
   <svg
     id="Layer_1"
@@ -122,9 +130,9 @@
   </svg>
 </template>
 
-<script setup lang="ts"></script>
-
 <style>
+/* Add the following styles to the component for  */
+/* the gradient to be applied to the SVG. */
 .cls-1 {
   fill: url(#linear-gradient);
 }
