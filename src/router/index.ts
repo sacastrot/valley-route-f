@@ -13,7 +13,7 @@
  *
  */
 
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { useStoreUser } from '@/stores/user'
 import HomeView from '../views/HomeView.vue'
 
@@ -132,7 +132,7 @@ const routes = [
  * The routes for the application.
  */
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: routes
 })
 
