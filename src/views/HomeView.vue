@@ -2,7 +2,6 @@
 import HomeCard from '@/components/page/home/HomeCard.vue'
 import SectionCard from '@/components/page/home/SectionCard.vue'
 import TheWelcome from '@/components/page/home/TheWelcome.vue'
-import { autService } from '@/services/user/login'
 import { useStoreUser } from '@/stores/user'
 import { onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
@@ -16,7 +15,6 @@ const redirectTo = (route: string) => {
 }
 
 onBeforeMount(async () => {
-  console.log('HomeView')
   const encryptedUser = window.localStorage.getItem('userData')
   if (encryptedUser) {
     const userData = JSON.parse(atob(encryptedUser))

@@ -1,31 +1,33 @@
 # Valley Route Frontend
 
-This is the frontend for the Valley Route project. It is a Vue application that allow users to:
+Este proyecto es el frontend para el proyecto Valley Route. Es una aplicación de Vue que permite a los usuarios:
 
-- View the map of the Valley Route routes
-- View all packages created by the users
-- Create a new package
-- View statistics of the packages
-- Register and login to the application
+- Ver el mapa de las rutas de Valley Route
+- Ver todos los paquetes creados por los usuarios
+- Crear un nuevo paquete
+- Ver estadísticas de los paquetes
+- Registrarse e iniciar sesión en la aplicación
+
+La aplicación se encuentra desplegada en AWS y se puede acceder a ella en el siguiente enlace: [Valley Route Frontend](http://valleyweb.s3-website-us-east-1.amazonaws.com/welcome)
 
 # Tabla de Contenidos
 
-1. [Project setup](#project-setup)
-2. [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
+1. [Configuración del Proyecto](#configuración-del-proyecto)
+2. [Iniciar en modo de desarrollo](#inicar-en-modo-de-desarrollo)
 3. [Infraestructura](#infraestructura)
 4. [Estructura de Archivos](#estructura-de-archivos)
 5. [Flujo de ejecución](#flujo-de-ejecución)
 
-## Project setup
+## Configuración del Proyecto
 
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Inicar en modo de desarrollo
 
 ```
-npm run serve
+npm run dev
 ```
 
 ## Infraestructura
