@@ -1,24 +1,54 @@
 <script setup lang="ts">
+//Vue imports
+import { onBeforeMount } from 'vue'
+
+//Vue Router imports
+import { useRouter } from 'vue-router'
+
+//Stores imports
+import { useStoreUser } from '@/stores/user'
+
+//Models imports
+
+//Views imports
 import HomeCard from '@/components/page/home/HomeCard.vue'
 import SectionCard from '@/components/page/home/SectionCard.vue'
 import TheWelcome from '@/components/page/home/TheWelcome.vue'
-import { useStoreUser } from '@/stores/user'
-import { onBeforeMount } from 'vue'
-import { useRouter } from 'vue-router'
 
+//Services imports
+
+// Instance of the router for redirect to another route
 const router = useRouter()
+
+// Instance of the user store for store the user data
 const userStore = useStoreUser()
+
+// Get the user data from the store
 const user = userStore.state
 
+/**
+ * Redirect to another route, withe
+ * the name of the route
+ *
+ * @param route
+ */
 const redirectTo = (route: string) => {
   router.push({ name: route })
 }
 
+/**
+ * Check if the user is logged in
+ */
 onBeforeMount(async () => {
+  // Get the user data from the local storage
   const encryptedUser = window.localStorage.getItem('userData')
+
+  // If the user is logged in, redirect to the user home
   if (encryptedUser) {
     const userData = JSON.parse(atob(encryptedUser))
     user.token = userData.token
+
+    // Redirect to the user home
     router.push({ name: 'userhome' })
   }
 })

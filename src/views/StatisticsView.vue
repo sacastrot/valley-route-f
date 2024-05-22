@@ -81,30 +81,32 @@ onBeforeMount(async () => {
 })
 </script>
 <template>
-  <div class="container mx-auto pt-5" v-if="!loadingStatistics">
-    <div class="home mb-3">
-      <!-- Link to redirect to the home page -->
-      <router-link to="/">
-        <i class="bi bi-house-fill"></i>
-        Inicio
-      </router-link>
+  <main class="container mx-auto pt-5">
+    <div v-if="!loadingStatistics">
+      <div class="home mb-3">
+        <!-- Link to redirect to the home page -->
+        <router-link to="/">
+          <i class="bi bi-house-fill"></i>
+          Inicio
+        </router-link>
+      </div>
+      <!-- Title of the page -->
+      <h1>Estadísticas</h1>
+      <!-- Description of the page -->
+      <p>
+        En esta página puedes ver estadísticas del número de paquetes que salen y entran para cada
+        uno de los nodos
+      </p>
+      <!-- Images of the statistics of the nodes -->
+      <div class="flex flex-wrap gap-5 my-5 statistics">
+        <img :src="nodeStartStatistic" alt="" />
+        <img :src="nodeEndStatistic" alt="" />
+      </div>
     </div>
-    <!-- Title of the page -->
-    <h1>Estadísticas</h1>
-    <!-- Description of the page -->
-    <p>
-      En esta página puedes ver estadísticas del número de paquetes que salen y entran para cada uno
-      de los nodos
-    </p>
-    <!-- Images of the statistics of the nodes -->
-    <div class="flex flex-wrap gap-5 my-5 statistics">
-      <img :src="nodeStartStatistic" alt="" />
-      <img :src="nodeEndStatistic" alt="" />
+    <div v-else>
+      <p>Cargando...</p>
     </div>
-  </div>
-  <div v-else>
-    <p>Cargando...</p>
-  </div>
+  </main>
 </template>
 
 <style scoped>

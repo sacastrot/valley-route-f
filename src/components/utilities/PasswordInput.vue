@@ -54,7 +54,7 @@ const togglePassword = () => {
   const passwordInput = document.getElementById(data.id) as HTMLInputElement
 
   // get icon html element
-  const iconPassword = document.getElementById('iconReset') as HTMLElement
+  const iconPassword = document.getElementById(iconId) as HTMLElement
 
   // check if the password is visible
   if (passwordInput.type === 'password') {
@@ -69,6 +69,7 @@ const togglePassword = () => {
 }
 
 const data = defineProps<InputI>()
+const iconId = `icon-${data.id}`
 </script>
 <template>
   <label :for="data.id" class="mt-2">{{ data.label }}</label>
@@ -84,10 +85,10 @@ const data = defineProps<InputI>()
     />
     <!-- This tag is used to show the button to toggle the password -->
     <div class="btn-password" @click="togglePassword">
-      <i id="iconReset" class="bi bi-eye-fill"></i>
+      <i :id="iconId" class="bi bi-eye-fill"></i>
     </div>
   </div>
-  <div class="text-red-200" v-if="data.error">
+  <div class="text-red-200" v-if="data.error && !data.errorMessage">
     <!-- This is message error for incorrect password -->
     <p>La contraseña debe tener por tu seguridad:</p>
     <ul>
@@ -97,6 +98,11 @@ const data = defineProps<InputI>()
       <li>Debe tener al menos un caracter especial (@_.&$)</li>
     </ul>
   </div>
+  <div class="text-red-200" v-if="data.error && data.errorMessage">
+    <!-- This is message error for incorrect password -->
+    <p>{{ data.errorMessage }}</p>
+  </div>
+  <div></div>
 </template>
 
 <style scoped>

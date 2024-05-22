@@ -64,6 +64,12 @@ const user = reactive<{ [key: string]: string }>({
   lastName: ''
 })
 
+const confirmPassword = reactive({
+  password: '',
+  error: false,
+  errorMessage: 'Las contraseñas no coinciden'
+})
+
 // Variable to store the errors in the form
 const errors = reactive<{ [key: string]: boolean }>({
   email: false,
@@ -138,6 +144,18 @@ const validateSerndRequest = () => {
 }
 
 /**
+ * This function is used to validate the confirm password in the reset
+ * password form
+ */
+const validConfirmPassword = () => {
+  if (user.password !== confirmPassword.password) {
+    confirmPassword.error = true
+  } else {
+    confirmPassword.error = false
+  }
+}
+
+/**
  * Function to submit the form, and
  * call the signup service to register the user
  */
@@ -151,11 +169,13 @@ const onSubmit = async () => {
   // Check if the user has accepted the policy
   if (!acceptPolicy.value) {
     messageAlert.value = 'Debes aceptar los términos y condiciones de uso'
+    loadingRequest.value = false
     return
   }
 
   // Check if the request can be sent
   if (!validateSerndRequest()) {
+    loadingRequest.value = false
     return
   }
 
@@ -197,6 +217,12 @@ const currentStep = ref(1)
 const nextStep = () => {
   // Validate the fields of the form
   validateNewUser('all')
+
+  validConfirmPassword()
+
+  if (confirmPassword.error) {
+    return
+  }
 
   // Check if the request can be sent
   if (!validateSerndRequest()) {
@@ -252,6 +278,16 @@ const nextStep = () => {
             :error="errors.password && fieldChange.password"
             :errorMessage="messages.password"
             @lossFocus="validateNewUser('password')"
+          />
+          <PasswordInput
+            id="repeatpassword"
+            type="password"
+            placeholder="********"
+            label="Confirmar contraseña"
+            v-model="confirmPassword.password"
+            :error="confirmPassword.error"
+            :errorMessage="confirmPassword.errorMessage"
+            @lossFocus="validConfirmPassword"
           />
           <div class="h-[1rem]"></div>
 

@@ -108,7 +108,9 @@ onBeforeMount(async () => {
       </div>
     </div>
     <!-- Section to show the loading message -->
-    <div v-else>Cargando...</div>
+    <div v-else>
+      <p>Cargando...</p>
+    </div>
   </main>
 </template>
 

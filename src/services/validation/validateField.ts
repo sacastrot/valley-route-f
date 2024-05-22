@@ -15,48 +15,48 @@ const validationRules: ValidationRules = {
   login: {
     email: {
       regex: emailRegex,
-      message: 'Please enter a valid email address.'
+      message: 'Por foavor, ingrese un correo electrónico válido.'
     },
     password: {
       regex: passwordRegex,
-      message: 'Please enter a valid password.'
+      message: 'Por favor, ingrese una contraseña válida.'
     }
   },
   // Validation rules for reset password fields
   reset: {
     email: {
       regex: emailRegex,
-      message: 'Please enter a valid email address.'
+      message: 'Por foavor, ingrese un correo electrónico válido.'
     },
     new_password: {
       regex: passwordRegex,
-      message: 'Please enter a valid password.'
+      message: 'Por favor, ingrese una contraseña válida.'
     }
   },
   // Validation rules for user fields
   user: {
     email: {
       regex: emailRegex,
-      message: 'Please enter a valid email address.'
+      message: 'Por foavor, ingrese un correo electrónico válido.'
     },
     password: {
       regex: passwordRegex,
-      message: 'Please enter a valid password.'
+      message: 'Por favor, ingrese una contraseña válida.'
     },
     firstName: {
       regex: minMaxRegex(2, 30),
-      message: 'First name must be between 2 and 30 characters long.'
+      message: 'El nombre debe tener entre 2 y 30 caracteres.'
     },
     lastName: {
       regex: minMaxRegex(0, 30),
-      message: 'Last name must be between 2 and 30 characters long.'
+      message: 'El apellido debe tener entre 0 y 30 caracteres.'
     }
   },
   // Validation rules for new package fields
   newpackage: {
     description: {
       regex: minMaxRegex(2, 50),
-      message: 'Description must be between 2 and 50 characters long.'
+      message: 'La descripción debe tener entre 2 y 50 caracteres.'
     }
   }
 }

@@ -9,7 +9,7 @@
  * This is used to store the user token in the store Pinia
  */
 //Vue imports
-import { onBeforeMount, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 //Vue Router imports
 import router from '@/router'
@@ -30,6 +30,7 @@ import SuccessAlert from '@/components/alert/SuccessAlert.vue'
 import validateField from '@/services/validation/validateField'
 import resetPassword from '@/services/user/resetPassword'
 import { autService } from '@/services/user/login'
+import PasswordInput from '@/components/utilities/PasswordInput.vue'
 
 //User store instance
 const userStore = useStoreUser()
@@ -43,7 +44,8 @@ const successChange = ref('')
 //Variable to change the password with the resetPassword service
 const reset = reactive<{ [key: string]: string }>({
   email: '',
-  new_password: ''
+  new_password: '',
+  repeatPassword: ''
 })
 
 //Variable to show show errors in the reset password form
@@ -61,7 +63,8 @@ const resetMessages = reactive<{ [key: string]: string }>({
 //Variable to show errors in the reset password form
 const resetErrors = reactive<{ [key: string]: boolean }>({
   email: false,
-  new_password: false
+  new_password: false,
+  repeatPassword: false
 })
 
 //Variable to login with the login service (autService)
@@ -99,23 +102,6 @@ const togglePassword = () => {
   const passwordInput = document.getElementById('password-input') as HTMLInputElement
   // Get the icon element
   const iconPassword = document.getElementById('iconPassword') as HTMLElement
-  if (passwordInput.type === 'password') {
-    passwordInput.type = 'text'
-    iconPassword.classList.remove('bi-eye-fill')
-    iconPassword.classList.add('bi-eye-slash-fill')
-  } else {
-    passwordInput.type = 'password'
-    iconPassword.classList.remove('bi-eye-slash-fill')
-    iconPassword.classList.add('bi-eye-fill')
-  }
-}
-
-/**
- * This function is used to toggle the password visibility in the reset password form
- */
-const toggleResetPassword = () => {
-  const passwordInput = document.getElementById('reset-input') as HTMLInputElement
-  const iconPassword = document.getElementById('iconReset') as HTMLElement
   if (passwordInput.type === 'password') {
     passwordInput.type = 'text'
     iconPassword.classList.remove('bi-eye-fill')
@@ -183,6 +169,18 @@ const validateResetPassword = (field: string) => {
 }
 
 /**
+ * This function is used to validate the confirm password in the reset
+ * password form
+ */
+const validConfirmPassword = () => {
+  if (reset.new_password !== reset.repeatPassword) {
+    resetErrors.repeatPassword = true
+  } else {
+    resetErrors.repeatPassword = false
+  }
+}
+
+/**
  * This function is used to validate the reset password form
  *
  * @returns {boolean}
@@ -210,9 +208,17 @@ const validRequest = () => {
  */
 
 const requestResetPassword = async () => {
+  loadingRequest.value = true
   validateResetPassword('all')
 
   if (!validRequest()) {
+    loadingRequest.value = false
+    return
+  }
+
+  validConfirmPassword()
+  if (resetErrors.repeatPassword) {
+    loadingRequest.value = false
     return
   }
 
@@ -226,10 +232,14 @@ const requestResetPassword = async () => {
     await resetPassword(body)
     successChange.value = 'Contraseña cambiada correctamente'
     showResetPassword.value = false
+    reset.email = ''
+    reset.new_password = ''
   } catch (error) {
     if (error instanceof Error) {
       messageAlert.value = error.message
     }
+  } finally {
+    loadingRequest.value = false
   }
 }
 
@@ -336,7 +346,7 @@ const requestLogin = async () => {
         </ul>
 
         <!-- Form to reset the password -->
-        <div class="mt-2">
+        <div class="mt-5">
           <!-- Email for reset password -->
           <PrimaryInput
             id="emailreset"
@@ -348,8 +358,7 @@ const requestLogin = async () => {
             :errorMessage="resetMessages.email"
           />
         </div>
-        <div class="password mt-4">
-          <!-- Input for the new password -->
+        <!-- <div class="password mt-4">
           <input
             type="password"
             class="border border-gray-300 rounded px-3 py-3"
@@ -361,16 +370,35 @@ const requestLogin = async () => {
           <div class="btn-password" @click="toggleResetPassword">
             <i id="iconReset" class="bi bi-eye-fill"></i>
           </div>
-        </div>
-        <!-- Section to show if the password is valid -->
-        <p class="text-red-200" v-if="resetErrors.new_password">
-          {{ resetMessages.new_password }}
-        </p>
+        </div> -->
+        <PasswordInput
+          id="resetpassword"
+          type="password"
+          placeholder="Nueva contraseña"
+          v-model="reset.new_password"
+          :error="resetErrors.new_password"
+          errorMessage="Ingrese una contraseña válida"
+          @lossFocus="validateResetPassword('new_password')"
+        />
+
+        <PasswordInput
+          id="repeatpassword"
+          type="password"
+          placeholder="Confirmar contraseña"
+          v-model="reset.repeatPassword"
+          :error="resetErrors.repeatPassword"
+          errorMessage="Las contraseñas no coinciden"
+          @lossFocus="validConfirmPassword"
+        />
       </div>
     </template>
     <template #footer>
       <!-- Button to request the reset password service -->
-      <PrimaryButton text="Cambiar contraseña" @click="requestResetPassword" />
+      <PrimaryButton
+        text="Cambiar contraseña"
+        @click="requestResetPassword"
+        :loading="loadingRequest"
+      />
     </template>
   </ModalBase>
 
